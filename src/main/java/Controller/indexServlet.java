@@ -9,6 +9,8 @@ import Model.DummyModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,7 @@ public class indexServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         String text="";
         DummyModel dm= new DummyModel();
-        text = dm.queryDemo();
+//        text = dm.queryDemo();
         request.setAttribute("demo", text);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
@@ -50,7 +52,11 @@ public class indexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       try {
+           processRequest(request, response);
+       } catch (SQLException ex) {
+           Logger.getLogger(indexServlet.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
@@ -64,7 +70,11 @@ public class indexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       try {
+           processRequest(request, response);
+       } catch (SQLException ex) {
+           Logger.getLogger(indexServlet.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
