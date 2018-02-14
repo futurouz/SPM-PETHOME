@@ -5,27 +5,32 @@
  */
 package Utils;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
 
 public class ConnectionBuilder {
 
-    public static Connection getConnection() throws SQLException, URISyntaxException, ClassNotFoundException {
+    public static Connection getConnection() {
         Connection con = null;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("env.properties");
+        Properties prop = new Properties();
         try {
+            prop.load(input);
             Class.forName("com.mysql.jdbc.Driver");
-            URI dbUri = new URI(System.getenv("DATABASE_URL"));
-            String username = dbUri.getUserInfo().split(":")[0];
-            String password = dbUri.getUserInfo().split(":")[1];
-            String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-            con = DriverManager.getConnection(dbUrl, username, password);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConnectionBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            String dbIp = prop.getProperty("PETHOME_DB_IP");
+            String dbName = prop.getProperty("PETHOME_DB_NAME");
+            String dbUsername = prop.getProperty("PETHOME_DB_USER");
+            String dbPassword = prop.getProperty("PETHOME_DB_PASS");
+            String dbPort = prop.getProperty("PETHOME_DB_PORT");
+            con = DriverManager.getConnection("jdbc:mysql://" + dbIp + ":" + dbPort + "/" 
+                    + dbName + "?zeroDateTimeBehavior=convertToNull", dbUsername, dbPassword);
+        } catch (SQLException | ClassCastException | ClassNotFoundException | IOException err) {
+            System.err.println(err);
         }
 
         return con;
