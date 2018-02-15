@@ -94,7 +94,7 @@ public class Post {
         this.timestamp = timesstamp;
     }
     
-    public static void savePost(Post p) {
+    public static void store(Post p) {
         Connection con = ConnectionBuilder.getConnection();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_SAVE_POST);
