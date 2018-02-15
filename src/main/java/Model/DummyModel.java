@@ -23,28 +23,21 @@ public class DummyModel {
     
     }
  public String queryDemo() throws SQLException{
-        try {
-            String demo = "";
-            Connection con = ConnectionBuilder.getConnection();
-            Statement st;
-            ResultSet rs = null;
-            try {
-                st = con.createStatement();
-                rs = st.executeQuery("SELECT * FROM TestLoadData");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if(rs != null){
-                while(rs.next())
-                    demo = rs.getString("data");
-            }
-            return demo;
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(DummyModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DummyModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+     String demo = "";
+     Connection con = ConnectionBuilder.getConnection();
+     Statement st;
+     ResultSet rs = null;
+     try {
+         st = con.createStatement();
+         rs = st.executeQuery("SELECT * FROM testloaddata");
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+     if(rs != null){
+         while(rs.next())
+             demo = rs.getString("data");
+     }
+     return demo;
     }
  
     public static void main(String[] args) throws SQLException {
