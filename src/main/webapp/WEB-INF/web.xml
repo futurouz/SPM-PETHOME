@@ -4,9 +4,17 @@
         <servlet-name>indexServlet</servlet-name>
         <servlet-class>Controller.indexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createPostServlet</servlet-name>
+        <servlet-class>Controller.createPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createPostServlet</servlet-name>
+        <url-pattern>/createPost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
