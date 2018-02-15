@@ -25,7 +25,7 @@ public class Post {
     private String location;
     private Date timestamp;
     final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,timestamp) VALUE(?,?,?,?,?,?,?)";
-
+    
     public Post() {
     }
 
@@ -98,16 +98,16 @@ public class Post {
         Connection con = ConnectionBuilder.getConnection();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_SAVE_POST);
-            pstm.setInt(1, p.postId);
-            pstm.setInt(2, p.userId);
-            pstm.setInt(3, p.petId);
-            pstm.setString(4, p.content);
-            pstm.setString(5, p.location);
-            pstm.setDate(6, p.timestamp);
+            pstm.setInt(1, p.getPostId());
+            pstm.setInt(2, p.getUserId());
+            pstm.setInt(3, p.getPetId());
+            pstm.setString(4, p.getContent());
+            pstm.setString(5, p.getLocation());
+            pstm.setDate(6, p.getTimestamp());
             pstm.execute();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
 }
