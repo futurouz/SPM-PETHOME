@@ -8,6 +8,10 @@
         <servlet-name>createPostServlet</servlet-name>
         <servlet-class>Controller.createPostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>feedServlet</servlet-name>
+        <servlet-class>Controller.feedServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>createPostServlet</servlet-name>
         <url-pattern>/createPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>feedServlet</servlet-name>
+        <url-pattern>/feed</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
