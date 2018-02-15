@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,18 +31,22 @@ public class createPostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet createPostServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet createPostServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        String type = request.getParameter("type");
+        String sex = request.getParameter("type");
+        String age = request.getParameter("age");
+        String vaccine = request.getParameter("locationOfPet");
+        String moreInformation = request.getParameter("moreInformation");
+
+        Post p = new Post();
+        p.setType(type);
+        p.setSex(sex);
+        p.setAge(age);
+        p.setVaccine(vaccine);
+        p.setContent(moreInformation);
+        
+        Post.store(p);
+        getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
