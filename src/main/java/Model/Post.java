@@ -9,7 +9,9 @@ import Utils.ConnectionBuilder;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
  * @author KN
  */
 public class Post {
+
     private int postId;
     private int userId;
     private int petId;
@@ -25,7 +28,8 @@ public class Post {
     private String location;
     private Date timestamp;
     final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,timestamp) VALUE(?,?,?,?,?,?,?)";
-    
+    final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
+
     public Post() {
     }
 
@@ -53,7 +57,7 @@ public class Post {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
-    
+
     public int getUserId() {
         return userId;
     }
@@ -86,14 +90,6 @@ public class Post {
         this.location = location;
     }
 
-    public Date getTimesstamp() {
-        return timestamp;
-    }
-
-    public void setTimesstamp(Date timesstamp) {
-        this.timestamp = timesstamp;
-    }
-    
     public static void store(Post p) {
         Connection con = ConnectionBuilder.getConnection();
         try {
@@ -109,5 +105,35 @@ public class Post {
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static ArrayList<Post> queryPost(int startPost) {
+        Connection con = ConnectionBuilder.getConnection();
+        ArrayList<Post> posts = null;
+        Post post = new Post();
+        ResultSet rs = null;
+        try {
+            PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST);
+            pstm.setInt(1, startPost - 1);
+            pstm.setInt(2, startPost - 1 == 0 ? startPost + 10 : startPost * 10);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                ORM(rs, post);
+                posts.add(post);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return posts;
+    }
+
+    private static void ORM(ResultSet rs, Post post) throws SQLException {
+        post.setPostId(rs.getInt("postId"));
+        post.setUserId(rs.getInt("userId"));
+        post.setPetId(rs.getInt("petId"));
+        post.setContent(rs.getString("content"));
+        post.setLocation(rs.getString("location"));
+        post.setTimestamp(rs.getDate("timestamp"));
+
     }
 }
