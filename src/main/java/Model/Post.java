@@ -26,8 +26,12 @@ public class Post {
     private int petId;
     private String content;
     private String location;
+    private String type;
+    private String sex;
+    private String age;
+    private String vaccine;
     private Date timestamp;
-    final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,timestamp) VALUE(?,?,?,?,?,?,?)";
+    final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,type,sex,age,vaccine,timestamp) VALUE(?,?,?,?,?,?,?,?,?,?,?)";
     final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
 
     public Post() {
@@ -90,6 +94,39 @@ public class Post {
         this.location = location;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getVaccine() {
+        return vaccine;
+    }
+
+    public void setVaccine(String vaccine) {
+        this.vaccine = vaccine;
+    }
+    
+
     public static void store(Post p) {
         Connection con = ConnectionBuilder.getConnection();
         try {
@@ -99,7 +136,11 @@ public class Post {
             pstm.setInt(3, p.getPetId());
             pstm.setString(4, p.getContent());
             pstm.setString(5, p.getLocation());
-            pstm.setDate(6, p.getTimestamp());
+            pstm.setString(6, p.getType());
+            pstm.setString(7, p.getSex());
+            pstm.setString(8, p.getAge());
+            pstm.setString(9, p.getVaccine());
+            pstm.setDate(10, p.getTimestamp());
             pstm.execute();
             con.close();
         } catch (SQLException ex) {
@@ -133,6 +174,10 @@ public class Post {
         post.setPetId(rs.getInt("petId"));
         post.setContent(rs.getString("content"));
         post.setLocation(rs.getString("location"));
+        post.setType(rs.getString("type"));
+        post.setSex(rs.getString("sex"));
+        post.setAge(rs.getString("age"));
+        post.setVaccine(rs.getString("vaccine"));
         post.setTimestamp(rs.getDate("timestamp"));
 
     }
