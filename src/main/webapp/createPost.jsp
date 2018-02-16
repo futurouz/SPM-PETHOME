@@ -8,6 +8,30 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            function validateForm() {
+                var x = document.forms["myForm"]["age"].value;
+                var y = document.forms["myForm1"]["vaccine"].value;
+                var z = document.forms["myForm2"]["locationOfPet"].value;
+                var zz = document.forms["myForm3"]["moreInformation"].value;
+                if (x == "") {
+                    alert("INPUT NUMBER");
+                    return false;
+                }
+                if (y == "") {
+
+                    alert("INPUT DATA vaccine");
+                }
+                if(z ==""){
+                    
+                     alert("INPUT DATA locationOfPet");
+                }if(zz==""){
+                    
+                     alert("INPUT DATA moreInformation");
+                }
+            }
+        </script>
+
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +47,7 @@
         <h2>Create Post</h2>
         <div class="formInput">
             Type :
+
             <select name="type">
                 <option value="Item 3">choose</option>
                 <option value="Item1">Puppy</option>
@@ -30,6 +55,7 @@
                 <option value="Item 3">Bird</option>
                 <option value="Item 3">Rabbit</option>
             </select>
+
             <br>
             Sex :
             <input name="sex" type="radio" value="male">
@@ -37,19 +63,31 @@
             <input name="sex" type="radio" value="female">
             Female
             <br>
-            Age :
-            <input name="age" type="number">
+            <form name="myForm" 
+                  onsubmit="return validateForm()" method="post">
+                Age :
+                <input name="age" type="number"><input type="submit" value="Submit">
+            </form>
             <br>
-            Vaccine :
-            <input name="vaccine" type="numner" >
+
+            <form name="myForm1" 
+                  onsubmit="return validateForm()" method="post">
+                Vaccine : 
+                <input name="vaccine" type="number" ><input type="submit" value="Submit">
+            </form>
             <br>
-            Location :
-            <input name="locationOfPet" type="texe" >
-            <br>
-            More
-            <input name="moreInformation" type="textarea">
-            
-            <p><button type="submit" name="submitValue">Submit</button></p>
-            </div>
+            <form name="myForm2"
+                  onsubmit="return validateForm()" method="post">
+                Location :
+                <input name="locationOfPet" type="text" ><input type="submit" value="Submit">
+            </form>
+                <br>
+                  <form name="myForm3"
+                  onsubmit="return validateForm()" method="post">
+                More :
+                <input name="moreInformation" type="textarea"><input type="submit" value="Submit">
+                  </form>
+                
+        </div>
     </body>
 </html>
