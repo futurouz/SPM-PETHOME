@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Post;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,11 +32,12 @@ public class createPostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String type = request.getParameter("type");
-        String sex = request.getParameter("type");
+        String sex = request.getParameter("sex");
         String age = request.getParameter("age");
-        String vaccine = request.getParameter("locationOfPet");
+        String vaccine = request.getParameter("vaccine");
+        String location = request.getParameter("locationOfPet");
         String moreInformation = request.getParameter("moreInformation");
 
         Post p = new Post();
@@ -43,9 +45,11 @@ public class createPostServlet extends HttpServlet {
         p.setSex(sex);
         p.setAge(age);
         p.setVaccine(vaccine);
+        p.setLocation(location);
         p.setContent(moreInformation);
-        
-        Post.store(p);
+
+        User u = (User) request.getSession().getAttribute("user");
+        Post.store(p, u);
         getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
     }
 
