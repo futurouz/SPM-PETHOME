@@ -18,16 +18,17 @@
                     alert("INPUT NUMBER");
                     return false;
                 }
-                if (y == "") {
+                else if (y == "") {
 
                     alert("INPUT DATA vaccine");
                 }
-                if(z ==""){
-                    
-                     alert("INPUT DATA locationOfPet");
-                }if(zz==""){
-                    
-                     alert("INPUT DATA moreInformation");
+                else if (z == "") {
+
+                    alert("INPUT DATA locationOfPet");
+                }
+                else if (zz == "") {
+
+                    alert("INPUT DATA moreInformation");
                 }
             }
         </script>
@@ -81,13 +82,13 @@
                 Location :
                 <input name="locationOfPet" type="text" ><input type="submit" value="Submit">
             </form>
-                <br>
-                  <form name="myForm3"
+            <br>
+            <form name="myForm3"
                   onsubmit="return validateForm()" method="post">
                 More :
                 <input name="moreInformation" type="textarea"><input type="submit" value="Submit">
-                  </form>
-                
+            </form>
+
         </div>
     </body>
 </html>
