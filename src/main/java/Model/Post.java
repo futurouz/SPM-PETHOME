@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +32,7 @@ public class Post {
     private String age;
     private String vaccine;
     private Date timestamp;
-    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,type,sex,age,vaccine,timestamp) VALUE(?,?,?,?,?,?,?,?,?,?,?)";
+    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,content,location,timestamp) VALUE(?,?,?,?,?)";
     private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
     private final static String SQL_QUERY_POST_BY_ID = "SELECT * FROM POST WHERE POSTID = ?";
 
@@ -127,21 +128,20 @@ public class Post {
         this.vaccine = vaccine;
     }
 
-    public static void store(Post p) {
+    public static void store(Post p, User u) {
         Connection con = ConnectionBuilder.getConnection();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_SAVE_POST);
             pstm.setInt(1, p.getPostId());
-            pstm.setInt(2, p.getUserId());
-            pstm.setInt(3, p.getPetId());
-            pstm.setString(4, p.getContent());
-            pstm.setString(5, p.getLocation());
-            pstm.setString(6, p.getType());
-            pstm.setString(7, p.getSex());
-            pstm.setString(8, p.getAge());
-            pstm.setString(9, p.getVaccine());
-            pstm.setDate(10, p.getTimestamp());
-            pstm.execute();
+            pstm.setInt(2, u.getUserId());
+            pstm.setString(3, p.getContent());
+            pstm.setString(4, p.getLocation());
+//            pstm.setString(6    , p.getType());
+//            pstm.setString(7, p.getSex());
+//            pstm.setString(8, p.getAge());
+//            pstm.setString(9, p.getVaccine());
+            pstm.setDate(5, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            pstm.executeUpdate();
             pstm.close();
             con.close();
         } catch (SQLException ex) {
