@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
  * @author azlich
  */
 public class User {
+
     private int userId;
     private String name;
     private String surname;
@@ -27,6 +29,7 @@ public class User {
     private String location;
     private boolean role;
     private final static String SQL_FIND_USER_BY_ID = "SELECT * FROM USER WHERE USERID = ?";
+    private final static String SQL_FIND_USER_BY_USERNAME = "SELECT * FROM USER WHERE USERNAME LIKE ?";
 
     public User() {
     }
@@ -40,7 +43,7 @@ public class User {
         this.password = password;
         this.location = location;
         this.role = role;
-    } 
+    }
 
     public int getUserId() {
         return userId;
@@ -110,8 +113,8 @@ public class User {
     public String toString() {
         return "User{" + "userId=" + userId + ", name=" + name + ", surname=" + surname + ", tel=" + tel + ", username=" + username + ", password=" + password + ", location=" + location + ", role=" + role + '}';
     }
-    
-    public static User findUserById(int userId){
+
+    public static User findUserById(int userId) {
         User user = null;
         Connection con = ConnectionBuilder.getConnection();
         try {
@@ -121,15 +124,40 @@ public class User {
             if (rs != null) {
                 while (rs.next()) {
                     user = new User();
-                    ORM(rs,user);
+                    ORM(rs, user);
                 }
             }
+            rs.close();
+            pstm.close();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
-    
+
+    public static User findByUsername(String username) {
+        User user = null;
+        Connection con = ConnectionBuilder.getConnection();
+        try {
+            PreparedStatement pstm = con.prepareStatement(SQL_FIND_USER_BY_USERNAME);
+            pstm.setString(1, username + "%");
+            ResultSet rs = pstm.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    user = new User();
+                    ORM(rs, user);
+                }
+            }
+            rs.close();
+            pstm.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
     private static void ORM(ResultSet rs, User user) throws SQLException {
         user.setUserId(rs.getInt("userId"));
         user.setName(rs.getString("name"));
@@ -138,6 +166,6 @@ public class User {
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password"));
         user.setLocation(rs.getString("location"));
-        user.setRole(rs.getInt("role")==0?true:false);
+        user.setRole(rs.getInt("role") == 0 ? true : false);
     }
 }
