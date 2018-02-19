@@ -31,8 +31,9 @@ public class Post {
     private String age;
     private String vaccine;
     private Date timestamp;
-    final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,type,sex,age,vaccine,timestamp) VALUE(?,?,?,?,?,?,?,?,?,?,?)";
-    final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
+    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,petId,content,location,type,sex,age,vaccine,timestamp) VALUE(?,?,?,?,?,?,?,?,?,?,?)";
+    private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
+    private final static String SQL_QUERY_POST_BY_ID = "SELECT * FROM POST WHERE POSTID = ?";
 
     public Post() {
     }
@@ -157,10 +158,13 @@ public class Post {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST);
             pstm.setInt(1, startPost - 1);
             pstm.setInt(2, startPost - 1 == 0 ? startPost + 10 : startPost * 10);
+            posts = new ArrayList<>();
             rs = pstm.executeQuery();
-            while (rs.next()) {
-                ORM(rs, post);
-                posts.add(post);
+            if (rs != null) {
+                while (rs.next()) {
+                    ORM(rs, post);
+                    posts.add(post);
+                }
             }
             rs.close();
             pstm.close();
@@ -169,6 +173,34 @@ public class Post {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }
         return posts;
+    }
+
+    public static ArrayList<Object> queryPostById(int postId) {
+        Connection con = ConnectionBuilder.getConnection();
+        Post post = null;
+        User user = null;
+        ResultSet rs = null;
+        ArrayList<Object> list = new ArrayList<>();
+        try {
+            PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST_BY_ID);
+            pstm.setInt(1, postId);
+            rs = pstm.executeQuery();
+            if (rs != null) {
+                post = new Post();
+                while (rs.next()) {
+                    ORM(rs, post);
+                }
+            }
+            user = User.findUserById(post.getUserId());
+            list.add(post);
+            list.add(user);
+            rs.close();
+            pstm.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
     private static void ORM(ResultSet rs, Post post) throws SQLException {
