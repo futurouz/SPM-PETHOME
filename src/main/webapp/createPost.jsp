@@ -17,16 +17,13 @@
                 if (x == "") {
                     alert("INPUT NUMBER");
                     return false;
-                }
-                else if (y == "") {
+                } else if (y == "") {
 
                     alert("INPUT DATA vaccine");
-                }
-                else if (z == "") {
+                } else if (z == "") {
 
                     alert("INPUT DATA locationOfPet");
-                }
-                else if (zz == "") {
+                } else if (zz == "") {
 
                     alert("INPUT DATA moreInformation");
                 }
@@ -46,49 +43,49 @@
             <%-- <div align ="right"> <image src="image/turn-notifications-on-button.svg"></div>--%>
         </div>
         <h2>Create Post</h2>
-        <div class="formInput">
-            Type :
+        <form>
+            <div class="formInput">
+                Type :
 
-            <select name="type">
-                <option value="Item 3">choose</option>
-                <option value="Item1">Puppy</option>
-                <option value="Item 2">Cat</option>
-                <option value="Item 3">Bird</option>
-                <option value="Item 3">Rabbit</option>
-            </select>
+                <select name="type">
+                    <option value="Item 3">choose</option>
+                    <option value="Item1">Puppy</option>
+                    <option value="Item 2">Cat</option>
+                    <option value="Item 3">Bird</option>
+                    <option value="Item 3">Rabbit</option>
+                </select>
 
-            <br>
-            Sex :
-            <input name="sex" type="radio" value="male">
-            Male
-            <input name="sex" type="radio" value="female">
-            Female
-            <br>
-            <form name="myForm" 
-                  onsubmit="return validateForm()" method="post">
+                <br>
+                Sex :
+                <input name="sex" type="radio" value="male">
+                Male
+                <input name="sex" type="radio" value="female">
+                Female
+                <br>
+
+                <%-- onsubmit="return validateForm()" method="post"><--%>
                 Age :
-                <input name="age" type="number"><input type="submit" value="Submit">
-            </form>
-            <br>
+                <input name="age" type="number">
+                </form>
+                <br>
 
-            <form name="myForm1" 
-                  onsubmit="return validateForm()" method="post">
+                <%--onsubmit="return validateForm()" method="post"><--%>
                 Vaccine : 
-                <input name="vaccine" type="number" ><input type="submit" value="Submit">
-            </form>
-            <br>
-            <form name="myForm2"
-                  onsubmit="return validateForm()" method="post">
-                Location :
-                <input name="locationOfPet" type="text" ><input type="submit" value="Submit">
-            </form>
-            <br>
-            <form name="myForm3"
-                  onsubmit="return validateForm()" method="post">
-                More :
-                <input name="moreInformation" type="textarea"><input type="submit" value="Submit">
-            </form>
+                <input name="vaccine" type="number" >
 
-        </div>
+                <br>
+
+                <%--  onsubmit="return validateForm()" method="post"><--%>
+                Location :
+                <input name="locationOfPet" type="text" >
+
+                <br>
+
+                <%--onsubmit="return validateForm()" method="post"><--%>
+                More :
+                <input name="moreInformation" type="textarea">
+
+            </div>
+        </form>
     </body>
 </html>
