@@ -125,7 +125,6 @@ public class Post {
     public void setVaccine(String vaccine) {
         this.vaccine = vaccine;
     }
-    
 
     public static void store(Post p) {
         Connection con = ConnectionBuilder.getConnection();
@@ -142,6 +141,7 @@ public class Post {
             pstm.setString(9, p.getVaccine());
             pstm.setDate(10, p.getTimestamp());
             pstm.execute();
+            pstm.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,6 +162,9 @@ public class Post {
                 ORM(rs, post);
                 posts.add(post);
             }
+            rs.close();
+            pstm.close();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }

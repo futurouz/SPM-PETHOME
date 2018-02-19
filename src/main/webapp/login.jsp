@@ -24,9 +24,9 @@
         <header>
                    <h1>LOGIN</h1>
         </header>
-        <form>
-            <h2>Login ID:       <input type="text" name="ID" required>
-            <h2>Password:     <input type="text" name="Password" required>
+        <form action="login" method="post"> 
+            <h2>Login ID:       <input type="text" name="username" required>
+            <h2>Password:     <input type="password" name="password" required>
             <br><input type="submit" value="Submit">  
         </form>
     </body>
