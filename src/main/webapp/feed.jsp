@@ -27,17 +27,17 @@
         </header>
         <p>
             <input type="text" placeholder="Search.." name="search">        
-            <button type="submit">Search</button>            
+            <button type="submit">Search</button>           
             <a href="./createPost.jsp">
                 <button type="submit">Post</button>
             </a>
-        </a>
-    </p>
-    <%
-        for (int i = 0; i < 10; i++) {
-    %>
-    <img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;"> 
-    <% }%>
+        </p>        
+    <c:forEach items="${posts}" var="p">
+        <td>${p.postId}</td>
+        <td>${p.userId}</td>
+        <td>${p.petId}</td>
+        <td>${p.content}</td>
+    </c:foreach>
 
 </body>
 </html>
