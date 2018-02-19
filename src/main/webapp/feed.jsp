@@ -30,11 +30,20 @@
             <button type="submit">Search</button>            
             <button type="submit">Post</button>
         </p>
-        <%
-            for(int i = 0; i < 10;i++){
-                %>
-                <img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;"> 
-            <% } %>
+       <c:forEach items="${posts}" var="p">
+           <td>${p.postId}</td>
+           <td>${p.userId}</td>
+           <td>${p.petId}</td>
+           <td>${p.content}</td>
+           
+       </c:foreach>
         
     </body>
 </html>
+
+<%-- <%
+            for(int i = 0; i < 10;i++){
+                %>
+                <img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;"> 
+           
+            <% } %>--%>
