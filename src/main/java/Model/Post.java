@@ -175,12 +175,13 @@ public class Post {
         return posts;
     }
 
-    public static ArrayList<Object> queryPostById(int postId) {
+    public static ArrayList<PostOfUser> queryPostById(int postId) {
         Connection con = ConnectionBuilder.getConnection();
         Post post = null;
         User user = null;
+        PostOfUser pou = null;
         ResultSet rs = null;
-        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<PostOfUser> lists = new ArrayList<>();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST_BY_ID);
             pstm.setInt(1, postId);
@@ -189,18 +190,18 @@ public class Post {
                 post = new Post();
                 while (rs.next()) {
                     ORM(rs, post);
+                    user = User.findUserById(post.getUserId());
+                    pou = new PostOfUser(post, user);
+                    lists.add(pou);
                 }
             }
-            user = User.findUserById(post.getUserId());
-            list.add(post);
-            list.add(user);
             rs.close();
             pstm.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return lists;
     }
 
     private static void ORM(ResultSet rs, Post post) throws SQLException {
