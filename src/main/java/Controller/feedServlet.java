@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Post;
+import Model.PostOfUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class feedServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = request.getParameter("page");
-        ArrayList<Post> posts = null;
+        ArrayList<PostOfUser> posts = null;
         if (page == null) {
             posts = Post.queryPost(1);
         } else {
