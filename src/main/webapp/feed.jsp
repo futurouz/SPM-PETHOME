@@ -33,10 +33,11 @@
             </a>
         </p>        
     <c:forEach items="${posts}" var="p">
-        <td>${p.postId}</td>
-        <td>${p.userId}</td>
-        <td>${p.petId}</td>
-        <td>${p.content}</td>
+        <td>${p.user.username}</td>
+        <td>${p.post.postId}</td>
+        <td>${p.post.userId}</td>
+        <td>${p.post.petId}</td>
+        <td>${p.post.content}</td>
     </c:foreach>
 
 </body>
