@@ -14,41 +14,82 @@
         <title>CreatePost</title>
         <link href="style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script language="JavaScript" src="gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
     </head>
     <body>
+        <style>
+            .error_strings {
+                font-family: Verdana;
+                font-size: 14px;
+                color: red;
+            }
+        </style>
         <div class="navigation">
             <h1>Pet Home</h1>
         </div>
         <h2>Create Post</h2>
-        <form action="createPost" method="post">
+
+        <!-- start form-->
+        <form action="createPost" method="myform" name="form" id="myform">
             Type :
             <select name="type">
-                <option value="Item 3">choose</option>
-                <option value="Item1">Puppy</option>
-                <option value="Item 2">Cat</option>
-                <option value="Item 3">Bird</option>
-                <option value="Item 3">Rabbit</option>
+                <option value="000">[ choose yours ]</option>
+                <option value="Puppy">Puppy</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="Rabbit">Rabbit</option>
             </select>
-            <br>
+            <div id='myform_type_errorloc' class="error_strings"></div>
             Sex :
-            <input name="sex" type="radio" value="male">
+            <input name="sex" type="radio">
             Male
-            <input name="sex" type="radio" value="female">
+            <input name="sex" type="radio" >
             Female
+            <div id='myform_sex_errorloc' class="error_strings"></div>
+
             <br>
             Age :
-            <input name="age" type="number">
+            <input name="age" type="number">          
+            <div id='myform_age_errorloc' class="error_strings"></div>
+
             <br>
             Vaccine : 
             <input name="vaccine" type="number" >
+            <div id='myform_vaccine_errorloc' class="error_strings"></div>
+
             <br>
             Location :
             <input name="locationOfPet" type="text" >
+            <div id='myform_locationOfPet_errorloc' class="error_strings"></div>
+
             <br>
             More :
             <input name="moreInformation" type="textarea">
+            <div id='myform_moreInformation_errorloc' class="error_strings"></div>
+
             <br>
-            <input type="submit" value="submit" />
+            <input type="submit" value="Submit" />
         </form>
+
+        <script>
+            var check = new Validator("myform");
+            check.EnableOnPageErrorDisplay()
+            check.EnableMsgsTogether();
+
+
+            check.addValidation("type", "req", "Please select one from the list");
+            check.addValidation("type", "dontselect=000");
+
+            check.addValidation("sex", "selone", "Please select an option");
+
+            check.addValidation("age", "req=", "Please enter age field");
+            check.addValidation("age", "maxlen=2", "Please enter valid value");
+
+            check.addValidation("vaccine", "req", "Please ente vaccine fieldr")
+            check.addValidation("vaccine", "numeric");
+
+            check.addValidation("locationOfPet", "req", "Please enter location field")
+            check.addValidation("moreInformation", "req", "Please enter information field")
+        </script>
     </body>
 </html>
