@@ -10,51 +10,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-
-        <style>
-            header, footer {
-                padding: 1em;
-                color: white;
-                background-color: cadetblue;
-                clear: left;
-                text-align: center;
-            }
-        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Feed Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PetHome</title>
+        <link href="https://fonts.googleapis.com/css?family=Kreon|Taviraj" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="main.css"/>
     </head>
-    <body>
-        <header>
-            <h1>PET HOME</h1>
-        </header>
-        <p>
-            <input type="text" placeholder="Search.." name="search">        
-            <button type="submit">Search</button>           
-            <a href="./createPost.jsp">
-                <button type="submit">Post</button>
-            </a>
-        </p> 
-        <p>
-    <c:forEach items="${posts.user}" var="u">
-        <h2>${u.username}</h2>
-        <h2>${u.name}</h2>
-        <h2>${u.surname}</h2>
-    </c:foreach>
-    <c:forEach items="${posts.post}" var="p">
-        <h2>${p.postid}</h2>
-        <h2>${p.age}</h2>
-        <h2>${p.sex}</h2>
-    </c:foreach>
-        <%
-            ArrayList<PostOfUser> pous = (ArrayList)request.getAttribute("posts");
-            
-            %>
-    <h1><%= pous.get(0).getUser().getUsername() %></h1>
-    <h1><%= pous.get(0).getPost().getPostId()%></h1>
-    <h1><%= pous.get(0).getPost().getAge() %></h1>
-    <h1><%= pous.get(0).getPost().getSex()%></h1>
-    <h1><%= pous.get(0).getUser().getName()%></h1>
-    <h1><%= pous.get(0).getUser().getSurname()%></h1>
-</p>
+
+
 </body>
+=======
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12  top-bg">
+            <a href="./feed.jsp">
+                <h1>PetHome</h1>
+            </a>
+            <a href="#">
+                <span class="logout">Logout</span>
+            </a>
+            <a href="#">
+                <span clas>Admin</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="search-tab">
+                <div class="input-group">
+                    <input type="text" class="form-control ">
+                    <span class="input-group-btn">
+                        <button class="btn">Search</button>
+                        <button class="btn all-submit">
+                            <a href="./createPost.jsp">New post</a>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <%
+                ArrayList<PostOfUser> pous = (ArrayList) request.getAttribute("posts");
+
+            %>
+            <h1><%= pous.get(0).getUser().getUsername()%></h1>
+            <h1><%= pous.get(0).getPost().getPostId()%></h1>
+            <h1><%= pous.get(0).getPost().getAge()%></h1>
+            <h1><%= pous.get(0).getPost().getSex()%></h1>
+            <h1><%= pous.get(0).getUser().getName()%></h1>
+            <h1><%= pous.get(0).getUser().getSurname()%></h1>
+        </div>
+    </div>
+</div>
+</body>
+
 </html>
