@@ -6,11 +6,13 @@
 package Model;
 
 import Utils.ConnectionBuilder;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -31,21 +33,21 @@ public class Post {
     private String sex;
     private String age;
     private String vaccine;
-    private Date timestamp;
-    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,content,location,timestamp) VALUE(?,?,?,?,?)";
-    private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY timestamp LIMIT ?,?";
+    private Date date;
+    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,content,location,date) VALUE(?,?,?,?,?)";
+    private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY date LIMIT ?,?";
     private final static String SQL_QUERY_POST_BY_ID = "SELECT * FROM POST WHERE POSTID = ?";
 
     public Post() {
     }
 
-    public Post(int postid, int userId, int petId, String content, String location, Date timesstamp) {
+    public Post(int postid, int userId, int petId, String content, String location, Date date) {
         this.postId = postid;
         this.userId = userId;
         this.petId = petId;
         this.content = content;
         this.location = location;
-        this.timestamp = timesstamp;
+        this.date = date;
     }
 
     public int getPostId() {
@@ -56,12 +58,12 @@ public class Post {
         this.postId = postId;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getUserId() {
@@ -70,14 +72,6 @@ public class Post {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public int getPetId() {
-        return petId;
-    }
-
-    public void setPetId(int petId) {
-        this.petId = petId;
     }
 
     public String getContent() {
@@ -151,15 +145,15 @@ public class Post {
 
     public static ArrayList<PostOfUser> queryPost(int startPost) {
         Connection con = ConnectionBuilder.getConnection();
-        Post post = null;
-        User user = null;
+        Post post = new Post();
+        User user = new User();
         PostOfUser pou = null;
         ResultSet rs = null;
         ArrayList<PostOfUser> posts = new ArrayList<>();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST);
-            pstm.setInt(1, startPost - 1);
-            pstm.setInt(2, startPost - 1 == 0 ? startPost + 10 : startPost * 10);
+            pstm.setInt(1, startPost - 1 == 0 ? 0 : startPost * 10);
+            pstm.setInt(2, startPost * 10);
             posts = new ArrayList<>();
             rs = pstm.executeQuery();
             if (rs != null) {
@@ -209,14 +203,13 @@ public class Post {
     private static void ORM(ResultSet rs, Post post) throws SQLException {
         post.setPostId(rs.getInt("postId"));
         post.setUserId(rs.getInt("userId"));
-        post.setPetId(rs.getInt("petId"));
         post.setContent(rs.getString("content"));
         post.setLocation(rs.getString("location"));
         post.setType(rs.getString("type"));
         post.setSex(rs.getString("sex"));
         post.setAge(rs.getString("age"));
         post.setVaccine(rs.getString("vaccine"));
-        post.setTimestamp(rs.getDate("timestamp"));
-
+        post.setDate(rs.getDate("date"));
     }
+
 }
