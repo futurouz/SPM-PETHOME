@@ -1,7 +1,7 @@
 <%-- 
     Document   : feed
     Created on : Feb 15, 2018, 11:19:25 PM
-    Author     : azlich
+    Author     : God
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -55,7 +55,7 @@
                 ArrayList<PostOfUser> pous = (ArrayList) request.getAttribute("posts");
                 for (int i = 0; i < pous.size(); i++) {
             %>
-            <a href="viewPost?postId=<%= pous.get(i).getPost().getPostId()%>">
+            <a href="viewPost?postId=<%= pous.get(i).getPost().getPostId()%>" class="decoration">
                 <div class="feed-post">
                     <h4><b>Owner:</b> <%= pous.get(i).getUser().getName()%> <%= pous.get(i).getUser().getSurname()%> </h4>
                     <p><b>Age:</b> <%= pous.get(i).getPost().getAge()%></p>
