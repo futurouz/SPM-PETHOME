@@ -40,6 +40,11 @@ body {
     color: white;
     background-color: #203F54;
 }
+
+.all-submit a {
+    color:white;
+    background-color: #203F54;
+}
 .error_strings {
     font-size: 14px;
     color: red;
@@ -62,4 +67,12 @@ body {
     padding: 50px;
     border-radius: 15px;
     box-shadow: 5px 5px 2px 1px rgba(157,170,181,.2);
+}
+
+.error-login {
+    color: red;
+}
+
+.search-tab {
+    margin-top: 15px;
 }
