@@ -4,6 +4,8 @@
     Author     : azlich
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.PostOfUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,14 +33,28 @@
             <a href="./createPost.jsp">
                 <button type="submit">Post</button>
             </a>
-        </p>        
-    <c:forEach items="${posts}" var="p">
-        <td>${p.user.username}</td>
-        <td>${p.post.postId}</td>
-        <td>${p.post.userId}</td>
-        <td>${p.post.petId}</td>
-        <td>${p.post.content}</td>
+        </p> 
+        <p>
+    <c:forEach items="${posts.user}" var="u">
+        <h2>${u.username}</h2>
+        <h2>${u.name}</h2>
+        <h2>${u.surname}</h2>
     </c:foreach>
-
+    <c:forEach items="${posts.post}" var="p">
+        <h2>${p.postid}</h2>
+        <h2>${p.age}</h2>
+        <h2>${p.sex}</h2>
+    </c:foreach>
+        <%
+            ArrayList<PostOfUser> pous = (ArrayList)request.getAttribute("posts");
+            
+            %>
+    <h1><%= pous.get(0).getUser().getUsername() %></h1>
+    <h1><%= pous.get(0).getPost().getPostId()%></h1>
+    <h1><%= pous.get(0).getPost().getAge() %></h1>
+    <h1><%= pous.get(0).getPost().getSex()%></h1>
+    <h1><%= pous.get(0).getUser().getName()%></h1>
+    <h1><%= pous.get(0).getUser().getSurname()%></h1>
+</p>
 </body>
 </html>
