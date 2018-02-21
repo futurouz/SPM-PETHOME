@@ -76,3 +76,23 @@ body {
 .search-tab {
     margin-top: 15px;
 }
+
+.feed-post {
+    border: 1px solid #193041;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 2px 1px rgba(157,170,181,.2);
+}
+
+#int_but {
+    transition:  0.35s;
+}
+
+.view-post {
+    margin: 15px;
+    border: 1px solid #C5D4E3;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 2px 1px rgba(157,170,181,.2);
+}
