@@ -38,6 +38,8 @@ public class interestedServlet extends HttpServlet {
           User u = new User();
           
           String postid = request.getParameter("postId");
+          
+          //ฝากทำinsertลงdatabaseด้วยนะครบ
         
          getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
     }
