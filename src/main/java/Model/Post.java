@@ -152,12 +152,14 @@ public class Post {
         ArrayList<PostOfUser> posts = new ArrayList<>();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST);
-            pstm.setInt(1, startPost - 1 == 0 ? 0 : startPost * 10);
+            pstm.setInt(1, startPost);
             pstm.setInt(2, startPost * 10);
             posts = new ArrayList<>();
             rs = pstm.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
+                    post = new Post();
+                    user = new User();
                     ORM(rs, post);
                     user = User.findUserById(post.getUserId());
                     pou = new PostOfUser(post, user);
