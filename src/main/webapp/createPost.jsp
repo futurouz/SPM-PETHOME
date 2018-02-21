@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PetHome - New post</title>
+        <title>CreatePost</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Kreon|Taviraj" rel="stylesheet">
@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12  top-bg">
-                    <a href="./feed.jsp"> 
+                    <a href="#"> 
                         <h1>PetHome</h1>
                     </a>
                     <a href="#">
@@ -60,7 +60,7 @@
                                 <label for="type ">Type</label>
                                 <select name="type" class="form-control">
                                     <option value="000">Select</option>
-                                    <option value="Puppy">Puppy</option>
+                                        <option value="Puppy">Puppy</option>
                                     <option value="Cat">Cat</option>
                                     <option value="Bird">Bird</option>
                                     <option value="Rabbit">Rabbit</option>
