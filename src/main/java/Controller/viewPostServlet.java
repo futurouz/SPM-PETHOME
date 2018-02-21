@@ -35,9 +35,9 @@ public class viewPostServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int postId = Integer.parseInt(request.getParameter("pageId"));
+        int postId = Integer.parseInt(request.getParameter("postId"));
         PostOfUser pos = Post.queryPostById(postId);
-        request.setAttribute("post", pos);
+        request.setAttribute("pos", pos);
         getServletContext().getRequestDispatcher("/viewPost.jsp").forward(request, response);
     }
 
