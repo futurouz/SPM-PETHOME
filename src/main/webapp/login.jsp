@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log in</title>
+        <title>PetHome - Log in</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Kreon|Taviraj" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -37,13 +37,16 @@
                                     <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control">
                                     <div id='myform_password_errorloc' class="error_strings test"></div>
+                                    <div class="error-login">
+                                        <p>${message}</p>
+                                    </div>
                                 </div>
                                 <input type="submit" value="Login" class="btn all-submit">  
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
-                        SOMETHING HERE
+                    <div class="col-md-4">
+                        <img src="image/dog.gif" alt="dog" class="img-responsive"   width="100%"/>
                     </div>
                 </div>
             </div> 
