@@ -27,13 +27,13 @@
                         <span class="logout">Logout</span>
                     </a>
                     <a href="#">
-                        <span clas>Admin</span>
+                        <span clas>${user.username}</span>
                     </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center create">
-<!--                    <p>Create Post<p>-->
+                    <!--                    <p>Create Post<p>-->
                 </div>
             </div>
             <!-- start form-->
