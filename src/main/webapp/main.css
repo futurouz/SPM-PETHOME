@@ -1,0 +1,65 @@
+body {
+    font-family: 'Kreon', 'Taviraj',serif;
+    margin-bottom: 15px;
+}
+.container-fluid{
+    /*    background-color: #F8F7F7;*/
+}
+
+.top-bg {
+    background-color: #203F54;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: light;
+}
+.top-bg h1 {
+    float: left
+}
+.top-bg span {
+    text-decoration: none;
+    color: white;
+}
+
+.top-bg h1 {
+    text-decoration: none;
+    color: white;
+}
+
+.top-bg span {
+    float: right;
+    padding-top: 15px;
+    padding-right: 15px;
+}
+.create p {
+    font-size: 30px; 
+    padding-top: 10px;
+    margin: 0px;
+}
+.all-submit {
+    color: white;
+    background-color: #203F54;
+}
+.error_strings {
+    font-size: 14px;
+    color: red;
+}
+
+.panel {
+    margin-top: 100px;
+}
+
+.login_panel {
+    border: 1px solid #C5D4E3;
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 2px 1px rgba(157,170,181,.2);
+}
+
+.create-panel {
+    margin: 15px;
+    border: 1px solid #C5D4E3;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 2px 1px rgba(157,170,181,.2);
+}
