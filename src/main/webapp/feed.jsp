@@ -26,7 +26,7 @@
             <a href="./feed.jsp">
                 <h1>PetHome</h1>
             </a>
-            <a href="#">
+            <a href="logout">
                 <span class="logout">Logout</span>
             </a>
             <a href="#">
@@ -55,7 +55,7 @@
                 ArrayList<PostOfUser> pous = (ArrayList) request.getAttribute("posts");
                 for (int i = 0; i < pous.size(); i++) {
             %>
-            <a href="viewPost?postId=<%= pous.get(i).getPost().getPostId()%>">
+            <a href="viewPost?postId=<%= pous.get(i).getPost().getPostId()%>" >
                 <div class="feed-post">
                     <h4><b>Owner:</b> <%= pous.get(i).getUser().getName()%> <%= pous.get(i).getUser().getSurname()%> </h4>
                     <p><b>Age:</b> <%= pous.get(i).getPost().getAge()%></p>

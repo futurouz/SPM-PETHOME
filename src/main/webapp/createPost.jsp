@@ -23,7 +23,7 @@
                     <a href="./feed.jsp"> 
                         <h1>PetHome</h1>
                     </a>
-                    <a href="#">
+                    <a href="logout">
                         <span class="logout">Logout</span>
                     </a>
                     <a href="#">
