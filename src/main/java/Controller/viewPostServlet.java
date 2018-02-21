@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Post;
+import Model.PostOfUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,24 +35,9 @@ public class viewPostServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        Post p = new Post();
-        
-        request.setAttribute("time",p.getTimestamp());
-        request.setAttribute("viewPostType",p.getType());
-        request.setAttribute("viewPostAge", p.getAge());
-        request.setAttribute("viewPostSex", p.getSex());
-        request.setAttribute("viewPostVaccine", p.getVaccine());
-        request.setAttribute("viewPostLocation",p.getLocation());
-        request.setAttribute("viewPostMoreInf", p.getContent());
-
-//        p.getType();
-//        p.getAge();
-//        p.getContent();
-//        p.getLocation();
-//        p.getPostId();
-//        p.getTimestamp();
-//        p.getVaccine();
-
+        int postId = Integer.parseInt(request.getParameter("pageId"));
+        PostOfUser pos = Post.queryPostById(postId);
+        request.setAttribute("post", pos);
         getServletContext().getRequestDispatcher("/viewPost.jsp").forward(request, response);
     }
 
