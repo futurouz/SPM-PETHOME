@@ -11,19 +11,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Post</title>
         <link href="style.css" rel="stylesheet">
+        <style>
+            body{
+               text-align: center;
+            }
+           .header{
+                padding: 1em;
+                color: white;
+                background-color: cadetblue;
+                clear: left;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div class="header">
             <h2>ViewPost</h2>            
         </div>
-        <div class="content">
-            <h1>UserName</h1>
-            <h2>Pet Type <%=request.getAttribute("")%></h2>
-            <h2>Sex <%=request.getAttribute("")%></h2>
-            <h2>Age <%=request.getAttribute("")%></h2>
-            <h2>Vaccine <%=request.getAttribute("")%></h2>
-            <h2>Location <%=request.getAttribute("")%></h2>
-            <h2>More <%=request.getAttribute("")%></h2>
+        <div class="contianer">
+            <h2>UserName</h2>
+            <h3>Pet Type : <%=request.getAttribute("viewPostType")%></h3>
+            <h3>Sex :<%=request.getAttribute("")%></h3>
+            <h3>Age :<%=request.getAttribute("viewPostAge")%></h3>
+            <h3>Vaccine :<%=request.getAttribute("viewPostVaccine")%></h3>
+            <h3>Location :<%=request.getAttribute("viewPostLocation")%></h3>
+            <h3>More :<%=request.getAttribute("viewPostMoreInf")%></h3>
         </div>
     </body>
 </html>

@@ -35,16 +35,24 @@ public class viewPostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         Post p = new Post();
+        
+        request.setAttribute("time",p.getTimestamp());
+        request.setAttribute("viewPostType",p.getType());
+        request.setAttribute("viewPostAge", p.getAge());
+        request.setAttribute("viewPostSex", p.getSex());
+        request.setAttribute("viewPostVaccine", p.getVaccine());
+        request.setAttribute("viewPostLocation",p.getLocation());
+        request.setAttribute("viewPostMoreInf", p.getContent());
 
-        p.getType();
-        p.getAge();
-        p.getContent();
-        p.getLocation();
-        p.getPostId();
-        p.getTimestamp();
-        p.getVaccine();
+//        p.getType();
+//        p.getAge();
+//        p.getContent();
+//        p.getLocation();
+//        p.getPostId();
+//        p.getTimestamp();
+//        p.getVaccine();
 
-        getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/viewPost.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

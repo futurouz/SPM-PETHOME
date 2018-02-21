@@ -149,11 +149,13 @@ public class Post {
         }
     }
 
-    public static ArrayList<Post> queryPost(int startPost) {
+    public static ArrayList<PostOfUser> queryPost(int startPost) {
         Connection con = ConnectionBuilder.getConnection();
-        ArrayList<Post> posts = null;
-        Post post = new Post();
+        Post post = null;
+        User user = null;
+        PostOfUser pou = null;
         ResultSet rs = null;
+        ArrayList<PostOfUser> posts = new ArrayList<>();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST);
             pstm.setInt(1, startPost - 1);
@@ -163,7 +165,9 @@ public class Post {
             if (rs != null) {
                 while (rs.next()) {
                     ORM(rs, post);
-                    posts.add(post);
+                    user = User.findUserById(post.getUserId());
+                    pou = new PostOfUser(post, user);
+                    posts.add(pou);
                 }
             }
             rs.close();
@@ -175,12 +179,12 @@ public class Post {
         return posts;
     }
 
-    public static ArrayList<Object> queryPostById(int postId) {
+    public static PostOfUser queryPostById(int postId) {
         Connection con = ConnectionBuilder.getConnection();
         Post post = null;
         User user = null;
+        PostOfUser pou = null;
         ResultSet rs = null;
-        ArrayList<Object> list = new ArrayList<>();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_QUERY_POST_BY_ID);
             pstm.setInt(1, postId);
@@ -189,18 +193,17 @@ public class Post {
                 post = new Post();
                 while (rs.next()) {
                     ORM(rs, post);
+                    user = User.findUserById(post.getUserId());
+                    pou = new PostOfUser(post, user);
                 }
             }
-            user = User.findUserById(post.getUserId());
-            list.add(post);
-            list.add(user);
             rs.close();
             pstm.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return pou;
     }
 
     private static void ORM(ResultSet rs, Post post) throws SQLException {
