@@ -6,9 +6,11 @@
 package Controller;
 
 import Model.Post;
+import Model.PostOfUser;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +52,9 @@ public class createPostServlet extends HttpServlet {
 
         User u = (User) request.getSession().getAttribute("user");
         Post.store(p, u);
+        ArrayList<PostOfUser> posts = null; 
+        posts = Post.queryPost(1);
+        request.setAttribute("posts", posts);
         getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
     }
 

@@ -34,8 +34,8 @@ public class Post {
     private String age;
     private String vaccine;
     private Date date;
-    private final static String SQL_SAVE_POST = "INSERT INTO Post(postId,userId,content,location,date) VALUE(?,?,?,?,?)";
-    private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY date LIMIT ?,?";
+    private final static String SQL_SAVE_POST = "INSERT INTO POST(userId,type,sex,age,vaccine,location,content,date) VALUE(?,?,?,?,?,?,?,?)";
+    private final static String SQL_QUERY_POST = "SELECT * FROM POST ORDER BY date desc LIMIT ?,?";
     private final static String SQL_QUERY_POST_BY_ID = "SELECT * FROM POST WHERE POSTID = ?";
 
     public Post() {
@@ -126,15 +126,14 @@ public class Post {
         Connection con = ConnectionBuilder.getConnection();
         try {
             PreparedStatement pstm = con.prepareStatement(SQL_SAVE_POST);
-            pstm.setInt(1, p.getPostId());
-            pstm.setInt(2, u.getUserId());
-            pstm.setString(3, p.getContent());
-            pstm.setString(4, p.getLocation());
-//            pstm.setString(6    , p.getType());
-//            pstm.setString(7, p.getSex());
-//            pstm.setString(8, p.getAge());
-//            pstm.setString(9, p.getVaccine());
-            pstm.setDate(5, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            pstm.setInt(1, u.getUserId());
+            pstm.setString(2, p.getType());
+            pstm.setString(3, p.getSex());
+            pstm.setString(4, p.getAge());
+            pstm.setString(5, p.getVaccine());
+            pstm.setString(6, p.getLocation());
+            pstm.setString(7, p.getContent());
+            pstm.setDate(8, java.sql.Date.valueOf(java.time.LocalDate.now()));
             pstm.executeUpdate();
             pstm.close();
             con.close();

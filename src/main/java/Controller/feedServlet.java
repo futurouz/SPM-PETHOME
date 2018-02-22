@@ -41,7 +41,7 @@ public class feedServlet extends HttpServlet {
                 int pageNumber = Integer.parseInt(page);
                 posts = Post.queryPost(pageNumber);
             } catch (NumberFormatException e) {
-                request.setAttribute("ErrorMsg", "Page's is not number");
+                    request.setAttribute("ErrorMsg", "Page's is not number");
             }
         }
         request.setAttribute("posts", posts);
