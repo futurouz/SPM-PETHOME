@@ -17,6 +17,7 @@
         <script language="JavaScript" src="gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
     </head>
     <body>
+       
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12  top-bg">
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <img src="image/dog.gif" alt="dog" class="img-responsive"   width="100%"/>
+                        <img src="image/<%= (int)(Math.random() * 4 ) + 1 %>.gif" alt="dog" class="img-responsive"   width="100%"/>
                     </div>
                 </div>
             </div> 
